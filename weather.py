@@ -1,6 +1,8 @@
 import requests
 import json
 from api import API_KEY, BASE_URL
+def city_name_check(city):
+    return any(char.isalpha() for char in city)
 
 def get_weather(city):
     parameters = {
@@ -12,6 +14,9 @@ def get_weather(city):
     try:
         response = requests.get(BASE_URL, params=parameters) 
         print("Request get | Success")
+        if response.status_code == 404:
+            print("City not found.")
+            return None
         response.raise_for_status() #Check for errors
         print("Status check | Success")
         data = response.json()
