@@ -11,12 +11,20 @@ def timestamp():
     formatted_time = time.strftime("%Y-%m-%d %H:%M")
     return formatted_time
 
-def save_history(weather):
+def clear_history():
+    with open("WeatherApp/history.json", "w") as file:
+            pass
+    
+def show_history():
     try:
         with open("WeatherApp/history.json", "r") as file:
             history = json.load(file)
     except:
         history = []
+    return history
+
+def save_history(weather):
+    history = show_history()
     
     history.append(weather)
 
