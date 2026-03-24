@@ -16,7 +16,7 @@ def main():
                     break
                 if not manager.city_name_check(city): # Check if name is valid (not a number)
                     print("Invalid city name.")
-                    continue
+                    break
                 weather = manager.get_weather(city)
                 manager.save_history(weather)
                 if weather:

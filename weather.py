@@ -26,8 +26,9 @@ class WeatherManager:
         return history
     #Saves history
     def save_history(self,weather):
+        if weather == None:
+            return
         history = self.show_history()
-        
         history.append(weather)
 
         with open("WeatherApp/history.json", "w") as file:
