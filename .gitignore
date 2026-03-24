@@ -1,2 +1,3 @@
 api.py
-weather.json
+__pycache__/
+history.json
