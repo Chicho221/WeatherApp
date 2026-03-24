@@ -1,0 +1,10 @@
+Weather App
+
+How to use:
+- Edit api.py and type your API key
+- Run main.py
+
+Features:
+- Show current weather in entered city (temperature, weather)
+- History of weather checkes with timestamps
+- Clear history option
