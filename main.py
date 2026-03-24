@@ -1,6 +1,7 @@
-from weather import get_weather, city_name_check, save_history, show_history, clear_history
+from weather import WeatherManager
 
 def main():
+    manager = WeatherManager()
     while True:
         print("\n1.Show Weather")
         print("2.Show History")
@@ -13,11 +14,11 @@ def main():
                 city = input("\nEnter city name (or 'exit'): ").lower()
                 if city == "exit":
                     break
-                if not city_name_check(city): # Check if name is valid (not a number)
+                if not manager.city_name_check(city): # Check if name is valid (not a number)
                     print("Invalid city name.")
                     continue
-                weather = get_weather(city)
-                save_history(weather)
+                weather = manager.get_weather(city)
+                manager.save_history(weather)
                 if weather:
                     print(f"\n---- Weather Report ----")
                     print(f"City: {weather['city']}")
@@ -27,7 +28,7 @@ def main():
         #Show History Option
         elif choice == "2":
             print("---- Weather History ----")
-            history = show_history()
+            history = manager.show_history()
             for log in history:
                 print(f"\nTime: {log["time"]} ")
                 print(f"City: {log["city"]} ")
@@ -38,7 +39,7 @@ def main():
             while True:
                 warning_choice = input("Are you sure? (y/n)")
                 if warning_choice == "y":
-                    clear_history()
+                    manager.clear_history()
                     break
                 elif warning_choice == "n":
                     break
