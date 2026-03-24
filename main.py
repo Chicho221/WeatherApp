@@ -1,4 +1,4 @@
-from weather import get_weather, city_name_check
+from weather import get_weather, city_name_check, save_history
 
 def main():
     while True:
@@ -9,7 +9,7 @@ def main():
             print("Invalid city name.")
             continue
         weather = get_weather(city)
-
+        save_history(weather)
         if weather:
             print(f"\n---- Weather Report ----")
             print(f"City: {weather['city']}")

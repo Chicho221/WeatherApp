@@ -1,9 +1,28 @@
 import requests
 import json
+from datetime import datetime
 from api import API_KEY, BASE_URL
+
 def city_name_check(city):
     return any(char.isalpha() for char in city)
 
+def timestamp():
+    time = datetime.now()
+    formatted_time = time.strftime("%Y-%m-%d %H:%M")
+    return formatted_time
+
+def save_history(weather):
+    try:
+        with open("WeatherApp/history.json", "r") as file:
+            history = json.load(file)
+    except:
+        history = []
+    
+    history.append(weather)
+
+    with open("WeatherApp/history.json", "w") as file:
+        json.dump(history, file, indent=4)
+        
 def get_weather(city):
     parameters = {
         "q": city,
@@ -21,11 +40,8 @@ def get_weather(city):
         print("Status check | Success")
         data = response.json()
 
-        #Dumps weather parameters in json file (for personal use and future upgrades)
-        with open ("WeatherApp/weather.json", "w") as file:
-            json.dump(data, file, indent=4)
-
         return {
+            "time": timestamp(),
             "city": data["name"],
             "temperature": data["main"]["temp"],
             "description": data["weather"][0]["description"]
